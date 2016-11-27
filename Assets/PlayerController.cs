@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
+
+  public Text countText;
 
   private int pickUpCount;
   private Rigidbody rb;
@@ -10,6 +13,7 @@ public class PlayerController : MonoBehaviour {
   void Start () {
     pickUpCount = 0;
     rb = GetComponent<Rigidbody> ();
+    UpdateCountText ();
   }
 
   // Update is called once per frame
@@ -30,6 +34,11 @@ public class PlayerController : MonoBehaviour {
     if (other.gameObject.CompareTag ("PickUp")) {
       other.gameObject.SetActive (false);
       pickUpCount += 1;
+      UpdateCountText ();
     }
+  }
+
+  void UpdateCountText () {
+    countText.text = "Count: " + pickUpCount;
   }
 }

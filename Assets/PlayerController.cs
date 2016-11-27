@@ -5,13 +5,16 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
   public Text countText;
+  public Text endOfGameText;
 
   private int pickUpCount;
+  private int pickUpTotal;
   private Rigidbody rb;
 
   // Use this for initialization
   void Start () {
     pickUpCount = 0;
+    pickUpTotal = (GameObject.FindGameObjectsWithTag ("PickUp")).Length;
     rb = GetComponent<Rigidbody> ();
     UpdateCountText ();
   }
@@ -40,5 +43,9 @@ public class PlayerController : MonoBehaviour {
 
   void UpdateCountText () {
     countText.text = "Count: " + pickUpCount;
+
+    if (pickUpCount == pickUpTotal) {
+      endOfGameText.gameObject.SetActive (true);
+    }
   }
 }
